@@ -1,16 +1,14 @@
 <template>
     <div class="wrapper">
         <v-head></v-head>
-        <div class="content-box" :class="{'content-collapse':collapse}">
-            <v-dashboard></v-dashboard>
-        </div>
+              <router-view></router-view>
+
     </div>
 </template>
 
 <script>
     import vHead from '../common/Header.vue';
     import bus from '../../utils/bus';
-    import vDashboard from './dashboard.vue'
 
     export default {
         data() {
@@ -19,8 +17,7 @@
             };
         },
         components: {
-            vHead,
-            vDashboard
+            vHead
         },
         created() {
             bus.$on('collapse-content', msg => {

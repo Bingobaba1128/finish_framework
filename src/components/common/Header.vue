@@ -14,7 +14,7 @@
                     :key="index"
                     @click="routerLink(index, item.path,item.redirect)">
                     <p :class="navIndex === index ? 'active' : ''">
-                        {{ item.title }}
+                        {{ item }}
                     </p>
                 </div>
                 
@@ -65,7 +65,7 @@
 
                 <div class="btn-logout" @click="userLogout">
                     <i class="el-icon-switch-button"></i>
-                    <span>{{}}</span>
+                    <span>退出</span>
                 </div>
                 
             </div>
@@ -84,18 +84,16 @@
                 collapse: false,
                 name: 'Admin',
                 showSublist: false,
-                user: {
-                    id:'',
-                    nickname:'',
-                    authorities:''
-                },
+                user: '',
                 showCompanyName:'',
-                nav: [
-                    {title:'成衣系统',redirect:'http://120.78.186.60:8081'},
-                    {title:'销售系统',path:'/saleSystem'},
-                    {title:'人资管理系统',path:'/HrManagement'},
-                    {title:'财务系统',redirect:'http://120.78.186.60:8080/caiwu/login'}
-                ],
+                nav: ''
+                // [
+                //     {title:'成衣系统',redirect:'http://120.78.186.60:8081'},
+                //     {title:'销售系统',path:'/saleSystem'},
+                //     {title:'人资管理系统',path:'/HrManagement'},
+                //     {title:'财务系统',redirect:'http://120.78.186.60:8080/caiwu/login'}
+                // ]
+                ,
                 navIndex: -1,
                 companyName:''
             };
@@ -103,7 +101,8 @@
 
         computed:{
             ...mapState({
-                companyList: state => state.companyDetail
+                companyList: state => state.companyDetail,
+                
             }),
             ...mapGetters ([
                 
@@ -134,8 +133,19 @@
                 this.navIndex = this.nav.findIndex(item => item.path === path);
             },
             handleCommand(command) {
-                window.console.log(command);
-                this.showCompanyName = command.name
+                var list = []
+                this.showCompanyName = command.name;
+                let companyAuth = this.user.authorities.filter((auth) =>{
+                    return auth.parentId == command.id
+                })
+                companyAuth.map(item => {
+                    list.push(item.displayName)
+                })
+                this.nav = list
+                
+                window.console.log(this.nav)
+
+
             }
 
         },

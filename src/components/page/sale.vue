@@ -1,6 +1,5 @@
 <template>
     <div>
-    <v-head></v-head>
     <iframe src="static/dist/index.html" class="pc iframe" scrolling="auto" >
     </iframe>
     </div>
@@ -8,13 +7,8 @@
 
 <script>
 
-import vHead from '../common/Header'
 
-export default {
-    components: {
-        vHead
-    }   
-}
+
 </script>
 
 <style>
