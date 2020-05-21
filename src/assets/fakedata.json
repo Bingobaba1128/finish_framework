@@ -1,0 +1,56 @@
+{
+    "userAuthDetails": [
+        {
+            "code": 0,
+            "data": {
+                "authorities": [{
+                    "authority": "saleSystem:Approve"
+                }, {
+                    "authority": "saleSystem:contractManagement"
+                }, {
+                    "authority": "saleSystem:contractAdd"
+                }, {
+                    "authority": "erp_v:yw"
+                }, {
+                    "authority": "saleSystem:SaleProduceAdd"
+                }, {
+                    "authority": "erp_v:yhgl"
+                }, {
+                    "authority": "erp_v:yhgl:all"
+                }, {
+                    "authority": "saleSystem:SaleProduce"
+                }, {
+                    "authority": "erp_v:jczl"
+                }],
+                "id": 1260,
+                "nickname": "dk",
+                "username": "dk"
+            },
+            "date2": null,
+            "message": null
+        },
+        {
+            "code": 0,
+            "data": {
+             "authorities": [{
+              "authority": "saleSystem:Approve"
+             }, {
+              "authority": "saleSystem:contractManagement"
+             }, {
+              "authority": "saleSystem:contractAdd"
+             }, {
+              "authority": "erp_v:yw"
+             }, {
+              "authority": "saleSystem:SaleProduceAdd"
+             }, {
+              "authority": "saleSystem:SaleProduce"
+             }],
+             "id": 1257,
+             "nickname": "閭撶",
+             "username": "dengke"
+            },
+            "date2": null,
+            "message": null
+        }
+    ]  
+}
