@@ -7,7 +7,6 @@
             </div>
             <div class="root">
                 系统选择
-                
             </div>
             <div class="expanded" v-show="showSublist">
                 <div class="system-list" 
@@ -26,9 +25,9 @@
 
         <div class="header-right">
             <div class="header-user-con">
-            <el-dropdown class="user-name" v-show="this.$store.state.showCompany">
+            <el-dropdown class="user-name" v-show='true'>
                     <span class="el-dropdown-link">
-                        北江股份有限公司
+                        {{showCompanyName}}
                     </span>
                 </el-dropdown>
                             <div class="user-avator">
@@ -43,13 +42,15 @@
                     </span>
                 </el-dropdown>
 
-                <el-dropdown class="user-name" trigger="click">
+                <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
                         切换公司
                         <i class="el-icon-caret-bottom"></i>
-                        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-                            <el-dropdown-item v-for="(company,index) in companyList" :key="index" :command="company" >
-                                <span style="display:block;" @click="clickme">{{company.name}}</span>
+                        <el-dropdown-menu slot="dropdown" class="user-dropdown" >
+                            <el-dropdown-item v-for="(company) in companyList" 
+                                :key="company.authority" 
+                                :command="{id:company.id,authority:company.authority,name:company.displayName}">
+                                <span style="display:block;" >{{company.displayName}}</span>
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </span>
@@ -59,12 +60,12 @@
                     <el-tooltip>
                         <i class="el-icon-message"></i>
                     </el-tooltip>
-                    <span class="btn-message-badge" @click="clickToGet">消息</span>
+                    <span class="btn-message-badge">消息</span>
                 </div>
 
                 <div class="btn-logout" @click="userLogout">
                     <i class="el-icon-switch-button"></i>
-                    <span>退出</span>
+                    <span>{{}}</span>
                 </div>
                 
             </div>
@@ -74,7 +75,8 @@
 
 <script>
     import bus from '../../utils/bus';
-    import * as api from '../../api/api.js'
+    import * as api from '../../api/api.js';
+    import { mapState, mapGetters } from 'vuex';
 
     export default {
         data() {
@@ -82,41 +84,40 @@
                 collapse: false,
                 name: 'Admin',
                 showSublist: false,
-                companyList: [
-                    {name: '北江股份',ID: '110'},
-                    {name: '北纺科技',ID: '111'},
-                    {name: '越南北江',ID: '112'},
-                    {name: '北纺进出口',ID: '113'},
-                    {name: '香港北江',ID: '114'},
-                ],
                 user: {
                     id:'',
                     nickname:'',
                     authorities:''
                 },
+                showCompanyName:'',
                 nav: [
                     {title:'成衣系统',redirect:'http://120.78.186.60:8081'},
                     {title:'销售系统',path:'/saleSystem'},
                     {title:'人资管理系统',path:'/HrManagement'},
                     {title:'财务系统',redirect:'http://120.78.186.60:8080/caiwu/login'}
                 ],
-                navIndex: -1
+                navIndex: -1,
+                companyName:''
             };
         },
 
+        computed:{
+            ...mapState({
+                companyList: state => state.companyDetail
+            }),
+            ...mapGetters ([
+                
+            ]),
+        },
         methods: {
-             collapseChage() {
+            collapseChage() {
                 this.collapse = !this.collapse;
                 bus.$emit('collapse', this.collapse);
                 this.showSublist = !this.showSublist;
             },
-            clickme(){
-                this.$store.dispatch("showCompanyName")
-            },
             userLogout() {
                 this.$token.deleteToken();
                 var logouturi = "http://127.0.0.1:8080/login";
-                
                 window.location.href = logouturi;
                 this.$router.push('/login')
             },
@@ -127,16 +128,16 @@
                 } 
                 if (redirect) {
                     window.location.href = redirect
-                }
-                
+                } 
             },
             checkRouterLocal(path) {
                 this.navIndex = this.nav.findIndex(item => item.path === path);
             },
-            clickToGet() {
-                this.$store.dispatch("getCompanyList")
-
+            handleCommand(command) {
+                window.console.log(command);
+                this.showCompanyName = command.name
             }
+
         },
         watch: {
             "$route"() {
@@ -152,7 +153,6 @@
                     this.$store.dispatch("addUser",this.user)
                     this.nickname = this.user.nickname
                 });
-            // this.$store.dispatch("getCompanyList")
         }
     }
 </script>

@@ -23,7 +23,6 @@
             vDashboard
         },
         created() {
-            // window.location.href = 'http://120.78.186.60:8087/oauth/authorize?client_id=erp_v&redirect_uri=http://192.168.137.98:8080&response_type=code&state=123'
             bus.$on('collapse-content', msg => {
                 this.collapse = msg;
             });

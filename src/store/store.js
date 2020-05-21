@@ -3,29 +3,32 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+
+
 const store = new Vuex.Store ({
+
 
   state: {
     user: '',
     company: '',
-    showCompany:false
+    showCompany:true,
+    companyDetail:[]
   },
 
   getters: {
-    
+
   },
 
   mutations: {
     addUserInfo(state,info) {
-      state.user = info
-    },
-    getCompany(state){
-      state.user.authorities.map( (item,index) => {
+      state.user = info;
+      state.user.authorities.map( (item) => {
         if(item.parentId == '0'){
-          window.console.log(item.displayName,index)
+          state.companyDetail.push(item)
         }
-      })      
+      })
     },
+
     showComp(state){
       state.showCompany = true
     } 
@@ -35,12 +38,8 @@ const store = new Vuex.Store ({
     addUser (context,info){
       context.commit("addUserInfo",info)
     },
-    getCompanyList(context){
-      context.commit("getCompany")
-    },
     showCompanyName(context) {
       context.commit("showComp")
-      window.console.log('ooppppp')
     },
   }
 
