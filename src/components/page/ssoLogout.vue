@@ -14,9 +14,14 @@ export default {
   },
   mounted:function () {
     this.$token.deleteToken();
-    var logouturi = this.$config.logoutUri+"?post_logout_redirect_uri="+this.$config.localuri+"/";
-    window.location.href = logouturi;
-    this.$router.push('/')
+    var authorUrl = this.$config.userAuthorizationUri;
+    authorUrl = authorUrl + ('?' + this.$querystring.stringify({
+      client_id:this.$config.clientId,
+      response_type:this.$config.response_type,
+      state:this.$config.code,
+      redirect_uri:this.$config.redirect_uri, 
+    }))
+    window.location.href = authorUrl; 
   }
 }
 </script>

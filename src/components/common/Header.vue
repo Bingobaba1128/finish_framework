@@ -77,6 +77,8 @@
     import bus from '../../utils/bus';
     import * as api from '../../api/api.js';
     import { mapState, mapGetters } from 'vuex';
+    import querystring from "querystring";
+
 
     export default {
         data() {
@@ -86,14 +88,7 @@
                 showSublist: false,
                 user: '',
                 showCompanyName:'',
-                nav: ''
-                // [
-                //     {title:'成衣系统',redirect:'http://120.78.186.60:8081'},
-                //     {title:'销售系统',path:'/saleSystem'},
-                //     {title:'人资管理系统',path:'/HrManagement'},
-                //     {title:'财务系统',redirect:'http://120.78.186.60:8080/caiwu/login'}
-                // ]
-                ,
+                nav: '',
                 navIndex: -1,
                 companyName:''
             };
@@ -116,16 +111,21 @@
             },
             userLogout() {
                 this.$token.deleteToken();
-                var logouturi = "http://127.0.0.1:8080/login";
-                window.location.href = logouturi;
-                this.$router.push('/login')
+                    var authorUrl = this.$config.userAuthorizationUri;
+                    authorUrl = authorUrl + ('?' + this.$querystring.stringify({
+                    client_id:this.$config.clientId,
+                    response_type:this.$config.response_type,
+                    state:this.$config.code,
+                    redirect_uri:this.$config.redirect_uri, 
+                    }))
+                    window.location.href = authorUrl; 
             },
             routerLink(index, route) {
                 this.navIndex = index;
                 let key = Object.keys(route)
                 if(key[1] == 'path'){
                    this.$router.push(route[key[1]]) 
-                } 
+                }
                 if (key[1] == 'redirect') {
                     window.location.href = route[key[1]]
                 } 
@@ -134,6 +134,7 @@
                 this.navIndex = this.nav.findIndex(item => item.path === path);
             },
             handleCommand(command) {
+
                 let list = []
                 this.showCompanyName = command.name;
                 this.$token.saveSelectedCompany(command.authority);
@@ -145,8 +146,31 @@
                     obj['name'] =item.displayName 
                     if(item.displayName == '销售系统'){
                         let path = '/saleSystem'
-                        obj['path'] = path
-                        list.push(obj)  
+                        obj['path'] = path                        
+                        list.push(obj) 
+                        //知道这个角色有销售系统授权，自动发给后端所选公司信息
+                        var tokenInfo = this.$token.loadToken();
+                        let data = {
+                            employeeId: tokenInfo.employeeId,
+                            employeeName: tokenInfo.employeeName,
+                            contractBody: tokenInfo.contractBody,
+                            gsCode: tokenInfo.gsCode
+                        };
+                        api
+                        .autologin(querystring.stringify(data),this.$ajax)
+                        .then(res => {
+                            window.console.log(res)
+                        if (res.code == 305) {
+                            this.$message({ message: res.msg, duration: 2000 });
+                        }
+                        if (res.code == 200) {
+                            window.console.log('passing the session to backend success')
+                        }
+                        })
+                        .catch(err => {
+                        window.console.log(err);
+                        });
+ 
                     }
                     else if(item.displayName == '成衣ERP') {
                         let redirect = 'http://120.78.186.60:8081'
@@ -160,9 +184,6 @@
                     }
                 })
                 this.nav = list
-
-                window.console.log(this.nav)
-
 
             }
 

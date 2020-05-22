@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-
-
 const store = new Vuex.Store ({
 
   state: {
@@ -40,6 +38,7 @@ const store = new Vuex.Store ({
     showCompanyName(context) {
       context.commit("showComp")
     },
+
   }
 
 

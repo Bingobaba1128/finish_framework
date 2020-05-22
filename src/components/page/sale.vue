@@ -1,6 +1,6 @@
 <template>
     <div>
-    <iframe src="static/dist/index.html" class="pc iframe" scrolling="auto" >
+    <iframe src="static/dist1/index.html" class="pc iframe" scrolling="auto" >
     </iframe>
     </div>
 </template>
