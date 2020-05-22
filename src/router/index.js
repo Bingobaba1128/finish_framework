@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 //import Login from '../components/page/login.vue'
-const dashboard = resolve => require(['../components/page/dashboard.vue'], resolve);
+// const dashboard = resolve => require(['../components/page/dashboard.vue'], resolve);
 import ssoLogin from '../components/page/ssologin.vue'
 import sale from '../components/page/sale.vue'
 import Layout from '../components/page/Layout.vue'

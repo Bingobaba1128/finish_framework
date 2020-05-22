@@ -9,6 +9,18 @@ var token={
       sessionStorage.setItem("token_type",token.token_type);
       sessionStorage.setItem("scope",token.token_type);
     },
+    saveUserInfo :function (userInfo) {
+      sessionStorage.setItem("employeeId",userInfo.id);
+      sessionStorage.setItem("employeeName",userInfo.username);
+      // sessionStorage.setItem("contractBody",userInfo.expires_in);
+      // sessionStorage.setItem("gsCode",userInfo.refresh_token);
+    },
+    saveSelectedCompany :function (companyCode) {
+      sessionStorage.setItem("contractBody",companyCode);
+      sessionStorage.setItem("gsCode",companyCode);
+      // sessionStorage.setItem("contractBody",userInfo.expires_in);
+      // sessionStorage.setItem("gsCode",userInfo.refresh_token);
+    },
     deleteToken:function () {
       sessionStorage.setItem("access_token",null);
       sessionStorage.setItem("enabled",null);

@@ -12,9 +12,9 @@
                 <div class="system-list" 
                     v-for="(item, index) in nav"
                     :key="index"
-                    @click="routerLink(index, item.path,item.redirect)">
+                    @click="routerLink(index, item)">
                     <p :class="navIndex === index ? 'active' : ''">
-                        {{ item }}
+                        {{ item.name }}
                     </p>
                 </div>
                 
@@ -120,29 +120,47 @@
                 window.location.href = logouturi;
                 this.$router.push('/login')
             },
-            routerLink(index, path,redirect) {
+            routerLink(index, route) {
                 this.navIndex = index;
-                if(path){
-                   this.$router.push(path) 
+                let key = Object.keys(route)
+                if(key[1] == 'path'){
+                   this.$router.push(route[key[1]]) 
                 } 
-                if (redirect) {
-                    window.location.href = redirect
+                if (key[1] == 'redirect') {
+                    window.location.href = route[key[1]]
                 } 
             },
             checkRouterLocal(path) {
                 this.navIndex = this.nav.findIndex(item => item.path === path);
             },
             handleCommand(command) {
-                var list = []
+                let list = []
                 this.showCompanyName = command.name;
+                this.$token.saveSelectedCompany(command.authority);
                 let companyAuth = this.user.authorities.filter((auth) =>{
                     return auth.parentId == command.id
                 })
                 companyAuth.map(item => {
-                    list.push(item.displayName)
+                    let obj = {}
+                    obj['name'] =item.displayName 
+                    if(item.displayName == '销售系统'){
+                        let path = '/saleSystem'
+                        obj['path'] = path
+                        list.push(obj)  
+                    }
+                    else if(item.displayName == '成衣ERP') {
+                        let redirect = 'http://120.78.186.60:8081'
+                        obj['redirect'] = redirect
+                        list.push(obj)  
+                    }
+                    else {
+                        let redirect = 'www.baidu.com'
+                        obj['redirect'] = redirect
+                        list.push(obj)  
+                    }
                 })
                 this.nav = list
-                
+
                 window.console.log(this.nav)
 
 
@@ -160,6 +178,8 @@
             api.getUserInfo(this.$token.loadToken(),this.$ajax)
                 .then(res => {
                     this.user = res.data;
+                    this.$token.saveUserInfo(this.user);
+
                     this.$store.dispatch("addUser",this.user)
                     this.nickname = this.user.nickname
                 });
