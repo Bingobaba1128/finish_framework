@@ -17,7 +17,7 @@ export default {
     getToken:function(){
       this.$token.getTokenFromService(this,this.code,(response)=>{
         this.$token.savetoken(response.data);
-        this.$router.push('/loginlocal');
+        this.$router.push('/dashboard');
       },function (error) {
         window.console.log(error);
       });

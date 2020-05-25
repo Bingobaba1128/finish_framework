@@ -7,7 +7,7 @@ var loginUtil ={
     authorUrl = authorUrl + ('?' + vue.$querystring.stringify({
       client_id:vue.$config.clientId,
       response_type:vue.$config.response_type,
-      state:vue.$config.code,
+      state:'123',
       redirect_uri:vue.$config.redirect_uri, 
     }))
     window.location.href = authorUrl;

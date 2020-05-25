@@ -18,7 +18,7 @@ export const constantRouterMap = [
         
     },
     {
-        path:'/login',
+        path:'/home',
         component: ssoLogin,
     },
     {

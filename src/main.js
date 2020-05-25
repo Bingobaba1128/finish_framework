@@ -29,25 +29,25 @@ Vue.prototype.$querystring = querystring;
 
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8';
 
-router.beforeEach((to, from, next) => {
-    if (to.path === '/login') {
-      next();
-    } else {
-        let token1 = token.loadToken().access_token; 
-        if (!token1) {    
-            var authorUrl = config.userAuthorizationUri;
-            let authorUrlBuild = authorUrl + ('?' + querystring.stringify({
-              client_id:config.clientId,
-              response_type:config.response_type,
-              state:config.code,
-              redirect_uri:config.redirect_uri, 
-            }))
-            window.location.href = authorUrlBuild;        
-        } else {
-            next();
-      }
-    }
-  });
+// router.beforeEach((to, from, next) => {
+//     if (to.path === '/login') {
+//       next();
+//     } else {
+//         let token1 = token.loadToken().access_token; 
+//         if (!token1) {    
+//             var authorUrl = config.userAuthorizationUri;
+//             let authorUrlBuild = authorUrl + ('?' + querystring.stringify({
+//               client_id:config.clientId,
+//               response_type:config.response_type,
+//               state:config.code,
+//               redirect_uri:config.redirect_uri, 
+//             }))
+//             window.location.href = authorUrlBuild;        
+//         } else {
+//             next();
+//       }
+//     }
+//   });
 
 new Vue({
     router,
