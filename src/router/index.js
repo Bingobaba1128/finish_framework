@@ -1,66 +1,99 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 //import Login from '../components/page/login.vue'
 // const dashboard = resolve => require(['../components/page/dashboard.vue'], resolve);
 import ssoLogin from '../components/page/ssologin.vue'
 import sale from '../components/page/sale.vue'
 import Layout from '../components/page/Layout.vue'
-import ssoIndex from '../components/page/ssoIndex.vue'
 import dashboard1 from '../components/page/dashboard.vue'
+import localLogin from '../components/page/localLogin.vue'
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-export const constantRouterMap = [
-    {
-        path: '/',
-        component: ssoIndex,
-        meta: { title: 'Index' }
+// export const constantRouterMap = [
+//     {
+//         path: '/',
+//         component: localLogin,
+//         meta: { title: 'Index' }
         
-    },
-    {
-        path:'/home',
-        component: ssoLogin,
-    },
-    {
-        path:'/loginlocal',
-        component: Layout,
-        redirect: '/dashboard',
-        meta: { title: 'index' },
-        children: [
-            {
-                path:'/dashboard',
-                component: dashboard1
-            },
-            {
-                path: '/saleSystem',
-                name: 'sale',
-                component: sale 
-            }
+//     },
+//     {
+//         path:'/home',
+//         component: ssoLogin,
+//     },
+//     {
+//         path:'/loginlocal',
+//         component: Layout,
+//         redirect: '/dashboard',
+//         meta: { title: 'index' },
+//         children: [
+//             {
+//                 path:'/dashboard',
+//                 component: dashboard1
+//             },
+//             {
+//                 path: '/saleSystem',
+//                 name: 'sale',
+//                 component: sale 
+//             }
 
-        ]
-    },
+//         ]
+//     },
 
-]
+// ]
+
+const router = new Router({
+    routes: [
+        {
+            path: '/',
+            // redirect: '/login',
+            component: localLogin,
+            meta: { title: 'Index' }
+        },
+        {
+            path:'/home',
+            component: ssoLogin,
+        },
+        {
+            path:'/loginlocal',
+            component: Layout,
+            redirect: '/dashboard',
+            meta: { title: 'index' },
+            children: [
+                {
+                    path:'/dashboard',
+                    component: dashboard1
+                },
+                {
+                    path: '/saleSystem',
+                    name: 'sale',
+                    component: sale 
+                }
+            ]
+        }
+    ],
+    mode: 'history'
+})
 
 // 导航守卫
-// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
-// routes.beforeEach((to, from, next) => {
-//     if (to.path === '/login') {
-//       next();
+// router.beforeEach((to, from, next) => {
+//     if (to.path === 'http://120.78.186.60:8087/login') {
+//         return next();
 //     } else {
 //         let token = this.$token.loadToken().access_token;   
-//       if (token === 'null' || token === '') {
-//         next('/login');
-//       } else {
-//         next();
-//       }
+//         if (token === 'null' || token === '') {
+//             next('/login');
+//         } else {
+//             next();
+//         }
 //     }
 //   });
 
-export default new VueRouter ({
-    routes: constantRouterMap,
-    mode: 'history'
-})
+export default router;
+// export default new VueRouter ({
+//     routes: constantRouterMap,
+//     mode: 'history'
+// })
 
 
 
