@@ -46,9 +46,12 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            // redirect: '/login',
+            redirect: '/login',
+        },
+        {
+            path:'/login',
             component: localLogin,
-            meta: { title: 'Index' }
+            meta: { title: 'login' }
         },
         {
             path:'/home',
@@ -76,18 +79,22 @@ const router = new Router({
 })
 
 // 导航守卫
-// router.beforeEach((to, from, next) => {
-//     if (to.path === 'http://120.78.186.60:8087/login') {
-//         return next();
-//     } else {
-//         let token = this.$token.loadToken().access_token;   
-//         if (token === 'null' || token === '') {
-//             next('/login');
-//         } else {
-//             next();
-//         }
-//     }
-//   });
+router.beforeEach((to, from, next) => {
+    if (to.path === '/login') {
+        return next();
+    } else {
+        const code = window.sessionStorage.getItem('access_token')
+        if (to.path === '/home') {
+            next();
+        } else {
+            if(!code){
+              next('/login');  
+            }
+            next()
+            
+        }
+    }
+  });
 
 export default router;
 // export default new VueRouter ({

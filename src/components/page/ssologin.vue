@@ -25,6 +25,7 @@ export default {
   },
   mounted:function () {
     this.code = this.$route.query.code;
+    this.$token.saveCode(this.code);
     this.state = this.$route.query.state;
     this.getToken();
   }

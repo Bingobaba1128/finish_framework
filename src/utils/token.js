@@ -9,6 +9,9 @@ var token = {
     sessionStorage.setItem("token_type", token.token_type);
     sessionStorage.setItem("scope", token.token_type);
   },
+  saveCode: function (code) {
+    sessionStorage.setItem("code", code);
+  },
   saveUserInfo: function (userInfo) {
     sessionStorage.setItem("employeeId", userInfo.id);
     sessionStorage.setItem("employeeName", userInfo.username);
