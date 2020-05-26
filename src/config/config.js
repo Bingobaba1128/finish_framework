@@ -1,5 +1,4 @@
 var config={
-
     //请求授权地址
     userAuthorizationUri:"http://120.78.186.60:8087/oauth/authorize",
     //用户信息请求地址
