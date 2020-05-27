@@ -1,14 +1,14 @@
 <template>
     <div class="header">
         <div class="header-left">
-            <div class="collapse-btn" @click="collapseChage">
+            <!-- <div class="collapse-btn" @click="collapseChage">
                 <i v-if="!collapse" class="el-icon-s-unfold"></i>         
                 <i v-else class="el-icon-s-fold"></i>  
-            </div>
+            </div> -->
             <div class="root">
-                系统选择
+                
             </div>
-            <div class="expanded" v-show="showSublist">
+            <div class="expanded" v-show="true">
                 <div class="system-list" 
                     v-for="(item, index) in nav"
                     :key="index"
@@ -42,12 +42,12 @@
                     </span>
                 </el-dropdown>
 
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand">
+                <el-dropdown class="user-name" trigger="click" @command="handleCommand" >
                     <span class="el-dropdown-link">
                         切换公司
                         <i class="el-icon-caret-bottom"></i>
                         <el-dropdown-menu slot="dropdown" class="user-dropdown" >
-                            <el-dropdown-item v-for="(company) in companyList" 
+                            <el-dropdown-item v-for="(company) in companyNewDetail" 
                                 :key="company.authority" 
                                 :command="{id:company.id,authority:company.authority,name:company.displayName}">
                                 <span style="display:block;" >{{company.displayName}}</span>
@@ -90,18 +90,16 @@
                 showCompanyName:'',
                 nav: '',
                 navIndex: -1,
-                companyName:''
+                companyName:'',
+                companyNewDetail:[]
             };
         },
 
         computed:{
-            ...mapState({
-                companyList: state => state.companyDetail,
-                
-            }),
-            ...mapGetters ([
-                
-            ]),
+            // ...mapState({
+            //     companyList: state => state.companyDetail,
+            // }),
+
         },
         methods: {
             collapseChage() {
@@ -193,10 +191,22 @@
                 .then(res => {
                     this.user = res.data;
                     this.$token.saveUserInfo(this.user);
-
-                    this.$store.dispatch("addUser",this.user)
+                    // this.$store.dispatch("addUser",this.user)
+                    //test
+                    this.user.authorities.map( (item) => {
+                        if(item.parentId == '0'){
+                            this.companyNewDetail.push(item)
+                        }
+                    })
+                    //test
                     this.nickname = this.user.nickname
                 });
+                for (let company in this.companyNewDetails){
+                    this.showCompanyName = company.displayName
+                    window.console.log(company.displayName)
+
+                }
+            
         }
     }
 </script>
