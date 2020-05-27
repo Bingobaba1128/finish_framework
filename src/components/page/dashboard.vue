@@ -15,13 +15,10 @@
                             <p style="padding-left:20px">在这里放置每日运势</p>
                     </el-col>
                 </el-row>
-                    
-
             </el-col>
 
             <el-col :span="8">
                 <div class="grid-content">
-                    
                 </div>
             </el-col>
         </el-row>
@@ -53,18 +50,20 @@
             <el-col :span="24">
                 <el-row :gutter="10" type="flex" justify="center" >
                     <el-col :span="24">
-                            <v-message1></v-message1>           
+                            <v-message></v-message>           
                     </el-col>
                 </el-row>
             </el-col>
         </el-row>
+        <v-pop></v-pop>
                 
     </div>
 </template>
 
 <script>
     import vCalendar from '../functionalComponent/calendar.vue'
-    import vMessage1 from '../functionalComponent/tabMessage1.vue'
+    import vMessage from '../functionalComponent/tabMessage.vue'
+    import vPop from '../individualComponent/main'
 
     // import VueCal from 'vue-cal'
     // import 'vue-cal/dist/vuecal.css'
@@ -72,7 +71,8 @@
     export default {
         components: {
             vCalendar,
-            vMessage1
+            vMessage,
+            vPop
             //VueCal
         }
     };
