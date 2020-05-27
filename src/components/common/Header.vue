@@ -124,13 +124,11 @@
             checkRouterLocal(path) {
                 this.navIndex = this.nav.findIndex(item => item.path === path);
             },
-            handleCommand(command) {
-
+            mapSystem(targetId) {
                 let list = []
-                this.showCompanyName = command.name;
-                this.$token.saveSelectedCompany(command.authority);
+                window.console.log(targetId)
                 let companyAuth = this.user.authorities.filter((auth) =>{
-                    return auth.parentId == command.id
+                    return auth.parentId == targetId
                 })
                 companyAuth.map(item => {
                     let obj = {}
@@ -174,8 +172,16 @@
                         list.push(obj)  
                     }
                 })
-                this.nav = list
-
+                return list
+            },
+            saveToken(auth) {
+                this.$token.saveSelectedCompany(auth);
+            }
+            ,
+            handleCommand(command) {
+                this.showCompanyName = command.name;
+                this.saveToken(command.authority)
+                this.nav = this.mapSystem(command.id)
             }
 
         },
@@ -198,15 +204,16 @@
                             this.companyNewDetail.push(item)
                         }
                     })
+                    if(this.companyNewDetail.length == 1){
+                        this.showCompanyName = this.companyNewDetail[0].displayName
+                        this.saveToken(this.companyNewDetail[0].authority)
+                        this.nav = this.mapSystem(this.companyNewDetail[0].id)
+                    }
+            
                     //test
                     this.nickname = this.user.nickname
                 });
-                for (let company in this.companyNewDetails){
-                    this.showCompanyName = company.displayName
-                    window.console.log(company.displayName)
-
-                }
-            
+                
         }
     }
 </script>
