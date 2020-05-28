@@ -2,20 +2,17 @@
     <div class="dialog" v-show="showMask">
         <div class="dialog-container">
             <v-tab></v-tab>
-
             <div class="btns">
                 <div  class="confirm-btn" @click="confirmBtn">
                     {{confirmText}}
                 </div>
-
                 <div v-if="type == 'danger'" class="danger-btn" @click="dangerBtn">
                     驳回
                 </div>
                 <div v-if="type != 'confirm'" class="default-btn" @click="closeBtn">
-                    取消
+                    {{cancelText}}
                 </div>
             </div>
-            <div class="close-btn" @click="closeMask"><i class="iconfont icon-close"></i></div>
         </div>
         
     </div>
@@ -29,7 +26,6 @@ export default {
     },
     props: {
         value: {},
-        // 类型包括 defalut 默认， danger 危险， confirm 确认，
         type:{
             type: String,
             default: 'default'
@@ -42,7 +38,10 @@ export default {
             type: String,
             default: ''
         },
-
+        cancelText: {
+            type: String,
+            default: '取消'
+        },
         dangerText: {
             type: String,
             default: '驳回'

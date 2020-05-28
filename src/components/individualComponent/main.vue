@@ -1,11 +1,12 @@
 <template>
     <div class="main">
         <div @click="openMask">打开弹窗</div>
-        <dialog-bar v-model="sendVal" 
+        <dialog-bar v-show="sendVal"
+            value="sendVal" 
             type="danger" 
             title="我是标题" 
             content="审批信息" 
-            v-on:cancel="clickCancel()"
+            @cancel="clickCancel()"
             @danger="clickDanger()" 
             @confirm="clickConfirm()" 
             dangerText="Delete">
@@ -16,7 +17,7 @@
 import dialogBar from './dialog.vue'
 export default {
    components:{
-        'dialog-bar': dialogBar,
+        dialogBar,
     },
     data(){
         return{
@@ -28,13 +29,22 @@ export default {
             this.sendVal = true;
         },
         clickCancel(){
-            window.console.log('点击了取消');
+            this.$message({
+                message: '操作已取消',
+                type: 'warning'
+            });
         },
         clickDanger(){
-            window.console.log('这里是danger回调')
+            this.$message({
+                message: '审批已被驳回',
+                type: 'error'
+            });
         },
         clickConfirm(){
-            window.console.log('点击了confirm');
+            this.$message({
+                message: '审批已通过',
+                type: 'success'
+            });
         }
     }
 }

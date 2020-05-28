@@ -34,7 +34,7 @@
                             <el-table-column prop="date" width="180" label="发送日期"></el-table-column>
                             <el-table-column label="标题">
                                 <template v-slot="scope">
-                                    <span class="message-title">{{scope.row.title}}</span>
+                                    <span class="message-title" >{{scope.row.title}}</span>
                                 </template>
                             </el-table-column>
                             <el-table-column prop="author" width="180" label="发送人"></el-table-column>
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+    import vPop from '../individualComponent/main'
+
     export default {
         name: 'tabs',
         data() {
@@ -84,6 +86,9 @@
             unreadNum(){
                 return this.unread.length;
             }
+        },
+        components:{
+            vPop
         }
     }
 
