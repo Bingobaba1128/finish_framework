@@ -9,11 +9,11 @@ const store = new Vuex.Store ({
     user: '',
     company: '',
     showCompany:true,
-    companyDetail:[]
+    companyDetail:[],
+    switchCompany:true
   },
 
   getters: {
-
   },
 
   mutations: {
@@ -28,6 +28,9 @@ const store = new Vuex.Store ({
 
     showComp(state){
       state.showCompany = true
+    },
+    displayCompany(switchCompany){
+      this.switchCompany = !switchCompany
     } 
   },
 

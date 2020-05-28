@@ -1,15 +1,14 @@
 <template>
     <div class="header">
         <div class="header-left">
-            <!-- <div class="collapse-btn" @click="collapseChage">
-                <i v-if="!collapse" class="el-icon-s-unfold"></i>         
-                <i v-else class="el-icon-s-fold"></i>  
-            </div> -->
-            <div class="root">
-                
+            <div class="logo">
+                <img  :src="imgUrl">
+            </div>
+            <div class="root header_text" @click="backToConsole">
+                控制台
             </div>
             <div class="expanded" v-show="true">
-                <div class="system-list" 
+                <div class="system-list header_text" 
                     v-for="(item, index) in nav"
                     :key="index"
                     @click="routerLink(index, item)">
@@ -26,7 +25,7 @@
         <div class="header-right">
             <div class="header-user-con">
             <el-dropdown class="user-name" v-show='true'>
-                    <span class="el-dropdown-link">
+                    <span class="el-dropdown-link" style="color:#4D96F4">
                         {{showCompanyName}}
                     </span>
                 </el-dropdown>
@@ -37,13 +36,13 @@
                 
 
                 <el-dropdown class="user-name">
-                    <span class="el-dropdown-link">
+                    <span class="el-dropdown-link" style="color:#4D96F4">
                         {{ user.nickname }}
                     </span>
                 </el-dropdown>
 
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand" v-show="switchCompany">
-                    <span class="el-dropdown-link">
+                <el-dropdown class="user-name" trigger="click" @command="handleCommand" >
+                    <span class="el-dropdown-link header_text" style="color:#666666">
                         切换公司
                         <i class="el-icon-caret-bottom"></i>
                         <el-dropdown-menu slot="dropdown" class="user-dropdown" >
@@ -56,16 +55,16 @@
                     </span>
                 </el-dropdown>
 
-                <div class="btn-message">
+                <div class="btn-message" >
                     <el-tooltip>
                         <i class="el-icon-message"></i>
                     </el-tooltip>
-                    <span class="btn-message-badge">消息</span>
+                    <span class="btn-message-badge" style="color:#666666">消息</span>
                 </div>
 
                 <div class="btn-logout" @click="userLogout">
-                    <i class="el-icon-switch-button"></i>
-                    <span>退出</span>
+                    <i class="el-icon-switch-button" style="color:#666666" ></i>
+                    <span style="color:#666666">退出</span>
                 </div>
                 
             </div>
@@ -77,6 +76,7 @@
     import bus from '../../utils/bus';
     import * as api from '../../api/api.js';
     import querystring from "querystring";
+    import imgUrl from "../../assets/img/nav_logo.png"
 
 
     export default {
@@ -91,7 +91,9 @@
                 navIndex: -1,
                 companyName:'',
                 companyNewDetail:[],
-                switchCompany: true
+                switchCompany: this.$store.displayName,
+                imgUrl:imgUrl
+
             };
         },
 
@@ -126,7 +128,6 @@
             },
             mapSystem(targetId) {
                 let list = []
-                window.console.log(targetId)
                 let companyAuth = this.user.authorities.filter((auth) =>{
                     return auth.parentId == targetId
                 })
@@ -157,7 +158,7 @@
                         }
                         })
                         .catch(err => {
-                        window.console.log(err);
+                            window.console.log(err);
                         });
  
                     }
@@ -182,6 +183,9 @@
                 this.showCompanyName = command.name;
                 this.saveToken(command.authority)
                 this.nav = this.mapSystem(command.id)
+            },
+            backToConsole() {
+                this.$router.push('/dashboard') 
             }
 
         },
@@ -238,11 +242,18 @@
         height: 70px;
         font-size: 22px;
         color: #fff;
+        box-shadow: 0 0 3px 0 #F2F2F3;
     }
     .header-left {
         float: left;
         display: flex;
-        padding-left:20px;
+        color:#4D96F4
+    }
+    .header_text {
+        color: #666666;
+    }
+    .header_text :active {
+        color: #4D96F4;
     }
     .collapse-btn {
         cursor: pointer;
@@ -251,11 +262,20 @@
     }
     .header .logo {
         float: left;
-        width: 250px;
+        width: 200px;
         line-height: 70px;
+        background-color: #0A1420;
+        position: relative;
+    }
+    .header .logo img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
     }
     .header-right {
         float: right;
+        color:#4D96F4
     }
     .header-user-con {
         display: flex;
@@ -269,8 +289,9 @@
         display: flex
     }
     .root {
+        cursor: pointer;
         order: 1;
-                padding:20px 6px;
+        padding:20px 30px;
 
     }
 
@@ -279,8 +300,6 @@
         cursor: pointer;
     }
     .system-list :hover {
-        background-color: #409eff;
-        border: 1px solid #dcdfe6;
         transform: translateY(5px)
     }
 
@@ -327,5 +346,5 @@
         transform: translateX(500px)
     }
 
-    .active{color:red;}
+    .active{color:#409eff;}
 </style>
