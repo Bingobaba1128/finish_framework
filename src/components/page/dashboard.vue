@@ -55,7 +55,6 @@
                 </el-row>
             </el-col>
         </el-row>
-        <v-pop></v-pop>
                 
     </div>
 </template>
@@ -63,7 +62,6 @@
 <script>
     import vCalendar from '../functionalComponent/calendar.vue'
     import vMessage from '../functionalComponent/tabMessage.vue'
-    import vPop from '../individualComponent/main'
 
     // import VueCal from 'vue-cal'
     // import 'vue-cal/dist/vuecal.css'
@@ -72,7 +70,6 @@
         components: {
             vCalendar,
             vMessage,
-            vPop
             //VueCal
         }
     };

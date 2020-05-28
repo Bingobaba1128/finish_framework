@@ -42,7 +42,7 @@
                     </span>
                 </el-dropdown>
 
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand" >
+                <el-dropdown class="user-name" trigger="click" @command="handleCommand" v-show="switchCompany">
                     <span class="el-dropdown-link">
                         切换公司
                         <i class="el-icon-caret-bottom"></i>
@@ -76,7 +76,6 @@
 <script>
     import bus from '../../utils/bus';
     import * as api from '../../api/api.js';
-    import { mapState, mapGetters } from 'vuex';
     import querystring from "querystring";
 
 
@@ -91,7 +90,8 @@
                 nav: '',
                 navIndex: -1,
                 companyName:'',
-                companyNewDetail:[]
+                companyNewDetail:[],
+                switchCompany: true
             };
         },
 
@@ -186,10 +186,23 @@
 
         },
         watch: {
-            "$route"() {
+            "$route"(to) {
                 let path = this.$route.path;
                 this.checkRouterLocal(path);
+                // if(to.name === 'sale') {
+                //     this.switchCompany = false
+                // }
             }
+            
+// watch: {
+//     '$route' (to, from) {
+//       if (to.name === 'home') {
+//         // something
+//       } else if (to.name === 'detail') {
+//         // something
+//       }
+//     }
+
         },
 
         mounted: function() {

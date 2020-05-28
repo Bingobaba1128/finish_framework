@@ -1,6 +1,5 @@
 <template>
     <div class="">
-        
         <div class="container">
             <el-tabs v-model="message">
                 <el-tab-pane :label="`待审批(${unread.length})`" name="first">
@@ -8,7 +7,7 @@
                         <el-table-column prop="date" width="180" label="发送日期"></el-table-column>
                         <el-table-column label="标题">
                             <template v-slot="scope">
-                                <span class="message-title">{{scope.row.title}}</span>
+                                <span class="message-title" @click="showDetail">{{scope.row.title}}</span>
                             </template>
                         </el-table-column>
                         <el-table-column prop="author" width="180" label="发送人"></el-table-column>
@@ -55,11 +54,21 @@
 
             </el-tabs>
         </div>
+        <dialog-bar v-model="sendVal"
+            value="sendVal" 
+            type="danger" 
+            title="我是标题" 
+            content="审批信息" 
+            @cancel="clickCancel()"
+            @danger="clickDanger()" 
+            @confirm="clickConfirm()" 
+            dangerText="Delete">
+        </dialog-bar>
     </div>
 </template>
 
 <script>
-    import vPop from '../individualComponent/main'
+    import dialogBar from '../individualComponent/dialog'
 
     export default {
         name: 'tabs',
@@ -79,7 +88,8 @@
                 read: [{
                     date: '2020-05-09 19:00:00',
                     title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
-                }]
+                }],
+                sendVal: false
             }
         },
         computed: {
@@ -88,7 +98,30 @@
             }
         },
         components:{
-            vPop
+            dialogBar
+        },
+        methods: {
+            showDetail() {
+                this.sendVal = true
+            },
+            clickCancel(){
+                this.$message({
+                    message: '操作已取消',
+                    type: 'warning'
+                });
+            },
+            clickDanger(){
+                this.$message({
+                    message: '审批已被驳回',
+                    type: 'error'
+                });
+            },
+            clickConfirm(){
+                this.$message({
+                    message: '审批已通过',
+                    type: 'success'
+                });
+            }
         }
     }
 

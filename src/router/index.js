@@ -5,42 +5,10 @@ import Router from 'vue-router'
 import ssoLogin from '../components/page/ssologin.vue'
 import sale from '../components/page/sale.vue'
 import Layout from '../components/page/Layout.vue'
-import dashboard1 from '../components/page/dashboard.vue'
+import dashboard from '../components/page/dashboard.vue'
 import localLogin from '../components/page/localLogin.vue'
 
 Vue.use(Router);
-
-// export const constantRouterMap = [
-//     {
-//         path: '/',
-//         component: localLogin,
-//         meta: { title: 'Index' }
-        
-//     },
-//     {
-//         path:'/home',
-//         component: ssoLogin,
-//     },
-//     {
-//         path:'/loginlocal',
-//         component: Layout,
-//         redirect: '/dashboard',
-//         meta: { title: 'index' },
-//         children: [
-//             {
-//                 path:'/dashboard',
-//                 component: dashboard1
-//             },
-//             {
-//                 path: '/saleSystem',
-//                 name: 'sale',
-//                 component: sale 
-//             }
-
-//         ]
-//     },
-
-// ]
 
 const router = new Router({
     routes: [
@@ -65,7 +33,8 @@ const router = new Router({
             children: [
                 {
                     path:'/dashboard',
-                    component: dashboard1
+                    name: 'dashboard',
+                    component: dashboard
                 },
                 {
                     path: '/saleSystem',
