@@ -1,17 +1,18 @@
 <template>
     <div class="dialog" v-show="showMask">
         <div class="dialog-container">
-            <div class="dialog-title">{{title}}</div>
-            <div class="content" v-html="content"></div>
+            <v-tab></v-tab>
+
             <div class="btns">
-                <div v-if="type != 'confirm'" class="default-btn" @click="closeBtn">
-                    {{cancelText}}
-                </div>
-                <div v-if="type == 'danger'" class="danger-btn" @click="dangerBtn">
-                    {{dangerText}}
-                </div>
-                <div v-if="type == 'confirm'" class="confirm-btn" @click="confirmBtn">
+                <div  class="confirm-btn" @click="confirmBtn">
                     {{confirmText}}
+                </div>
+
+                <div v-if="type == 'danger'" class="danger-btn" @click="dangerBtn">
+                    驳回
+                </div>
+                <div v-if="type != 'confirm'" class="default-btn" @click="closeBtn">
+                    取消
                 </div>
             </div>
             <div class="close-btn" @click="closeMask"><i class="iconfont icon-close"></i></div>
@@ -20,7 +21,12 @@
     </div>
 </template>
 <script>
+import vTab from '../../views/spgl/tab/child1'
+
 export default {
+    components:{
+        vTab
+    },
     props: {
         value: {},
         // 类型包括 defalut 默认， danger 危险， confirm 确认，
@@ -36,17 +42,14 @@ export default {
             type: String,
             default: ''
         },
-        cancelText: {
-            type: String,
-            default: '取消'
-        },
+
         dangerText: {
             type: String,
-            default: '删除'
+            default: '驳回'
         },
         confirmText: {
             type: String,
-            default: '确认'
+            default: '审批'
         },
     },
     data(){
@@ -94,7 +97,7 @@ export default {
         background: rgba(0, 0, 0, 0.6);
         z-index: 9999;
         .dialog-container{
-            width: 500px;
+            width: 80%;
             height: 380px;
             background: #ffffff;
             position: absolute;

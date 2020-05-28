@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import * as spApi from "@/api/approvalApi.js";
-import querystring from "querystring";
+// import * as spApi from "@/api/approvalApi.js";
+// import querystring from "querystring";
 
 export default {
   name: "child1",
@@ -49,72 +49,72 @@ export default {
       approveContentlist: [],
     };
   },
-  methods: {
-    // 查看审批内容（按照条件）
-    approveContent() {
-      let id = sessionStorage.getItem("id")
-      let _data = {
-        condition:
-          "where approvePersonId='"+id+"' and state=0 and orderNo!=1 order by startTime desc"
-          // "where approvePersonId='10003' and state=0 and orderNo!=1 order by startTime desc"
-          // "where approvePersonId='1129118' and state=0 and orderNo!=1 order by startTime desc"
-      };
-      spApi
-        .getApproveContent(querystring.stringify(_data))
-        .then(res => {
-          this.approveContentlist = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    // 审批通过
-    approvalClick(row) {
-      // console.log(row)
-      let _data = {
-        approveNo: row.approveNo,
-        personId: row.approvePersonId,
-        no: row.no,
-      };
-      spApi
-        .getApprovePass(querystring.stringify(_data))
-        .then(res => {
-          this.$message({ message: res.msg, duration: 1500 });
-          this.approveContent();
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    // 审批驳回 getApproveReject
-    rejectClick(row) {
-      // console.log(row.reason);
-      if (row.reason !== "") {
-        let _data = {
-          approveNo: row.approveNo,
-          personId: row.approvePersonId,
-          reason: row.reason,
-          no:row.no,
-        };
-        spApi
-          .getApproveReject(querystring.stringify(_data))
-          .then(res => {
-            // console.log(res);
-            this.$message({ message: res.data, duration: 1500 });
-            this.approveContent();
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      } else {
-        this.$message({ message: "请填写驳回原因", duration: 1500 });
-      }
-    }
-  },
-  mounted() {
-    // let id = JSON.parse(sessionStorage.getItem('id'));
-    // this.id = id;
-    this.approveContent();
-  }
+  // methods: {
+  //   // 查看审批内容（按照条件）
+  //   approveContent() {
+  //     let id = sessionStorage.getItem("id")
+  //     let _data = {
+  //       condition:
+  //         "where approvePersonId='"+id+"' and state=0 and orderNo!=1 order by startTime desc"
+  //         // "where approvePersonId='10003' and state=0 and orderNo!=1 order by startTime desc"
+  //         // "where approvePersonId='1129118' and state=0 and orderNo!=1 order by startTime desc"
+  //     };
+  //     spApi
+  //       .getApproveContent(querystring.stringify(_data))
+  //       .then(res => {
+  //         this.approveContentlist = res.data;
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   },
+  //   // 审批通过
+  //   approvalClick(row) {
+  //     // console.log(row)
+  //     let _data = {
+  //       approveNo: row.approveNo,
+  //       personId: row.approvePersonId,
+  //       no: row.no,
+  //     };
+  //     spApi
+  //       .getApprovePass(querystring.stringify(_data))
+  //       .then(res => {
+  //         this.$message({ message: res.msg, duration: 1500 });
+  //         this.approveContent();
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   },
+  //   // 审批驳回 getApproveReject
+  //   rejectClick(row) {
+  //     // console.log(row.reason);
+  //     if (row.reason !== "") {
+  //       let _data = {
+  //         approveNo: row.approveNo,
+  //         personId: row.approvePersonId,
+  //         reason: row.reason,
+  //         no:row.no,
+  //       };
+  //       spApi
+  //         .getApproveReject(querystring.stringify(_data))
+  //         .then(res => {
+  //           // console.log(res);
+  //           this.$message({ message: res.data, duration: 1500 });
+  //           this.approveContent();
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //         });
+  //     } else {
+  //       this.$message({ message: "请填写驳回原因", duration: 1500 });
+  //     }
+  //   }
+  // },
+  // mounted() {
+  //   // let id = JSON.parse(sessionStorage.getItem('id'));
+  //   // this.id = id;
+  //   this.approveContent();
+  // }
 };
 </script>

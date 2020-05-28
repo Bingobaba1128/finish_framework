@@ -1,8 +1,15 @@
 <template>
     <div class="main">
         <div @click="openMask">打开弹窗</div>
-        <dialog-bar v-model="sendVal" type="danger" title="我是标题" content="我是内容" v-on:cancel="clickCancel()"
-         @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog-bar>
+        <dialog-bar v-model="sendVal" 
+            type="danger" 
+            title="我是标题" 
+            content="审批信息" 
+            v-on:cancel="clickCancel()"
+            @danger="clickDanger()" 
+            @confirm="clickConfirm()" 
+            dangerText="Delete">
+        </dialog-bar>
     </div>
 </template>
 <script>
