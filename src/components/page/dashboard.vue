@@ -1,7 +1,10 @@
 <template>
     <!-- 首页组件 -->
-    
-    <div style="width:98%; margin:15px auto">
+    <div style="display:initial">
+        <div style="width:200px; background-color:#0A1420; height:100%; float:left">
+            <v-weather></v-weather>
+        </div>
+    <div>
         <el-row :gutter="10" type="flex" justify="center" style="margin:15px auto">
             <div class="datemanage"></div>
             <el-col :span="16" class="grid-content" style="height:350px">
@@ -56,12 +59,15 @@
             </el-col>
         </el-row>
                 
+    </div>        
     </div>
+
 </template>
 
 <script>
     import vCalendar from '../functionalComponent/calendar.vue'
     import vMessage from '../functionalComponent/tabMessage.vue'
+    import vWeather from '../functionalComponent/weather'
 
     // import VueCal from 'vue-cal'
     // import 'vue-cal/dist/vuecal.css'
@@ -70,6 +76,7 @@
         components: {
             vCalendar,
             vMessage,
+            vWeather
             //VueCal
         }
     };

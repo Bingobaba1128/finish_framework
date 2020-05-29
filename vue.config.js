@@ -20,7 +20,7 @@
 //     devServer: {
 //       open: process.platform === "darwin",
 //       disableHostCheck: false,
-//       host: "0.0.0.0",
+//       host: "127.0.0.1",
 //       port: 8080,
 //       https: false,
 //       hotOnly: false,
@@ -49,18 +49,9 @@
 
 // vue.config.js
 module.exports = {
+  publicPath: './',
   devServer: {
     host: "127.0.0.1",
     port: 8080,
-
-  //     proxy: {
-  //       '/api': {
-  //           target:'http://120.78.186.60:8087', // 你请求的第三方接口
-  //           changeOrigin:true,
-  //           // pathRewrite:{  // 路径重写，
-  //           //   '^/api': ''  
-  //           // }
-  //     } 
-  // }
 }
 }

@@ -15,33 +15,34 @@
                     <p :class="navIndex === index ? 'active' : ''">
                         {{ item.name }}
                     </p>
-                </div>
-                
-            </div>
-            
-            
+                </div>               
+            </div>    
         </div>
 
         <div class="header-right">
             <div class="header-user-con">
-            <el-dropdown class="user-name" v-show='true'>
+                
+            <el-dropdown class="flex-header-div" v-show='true'>
                     <span class="el-dropdown-link" style="color:#4D96F4">
                         {{showCompanyName}}
                     </span>
                 </el-dropdown>
-                            <div class="user-avator">
+
+            
+
+            <el-dropdown class="flex-header-div" style="display:flex">
+                <!-- <div class="user-avator">
                     <div class="el-icon-s-custom"></div>
-                </div>
+                </div> -->
+                欢迎您，
+                <span class="el-dropdown-link" style="color:#4D96F4">
+                    {{ user.nickname }}
+                </span>
+            </el-dropdown>
 
-                
-
-                <el-dropdown class="user-name">
-                    <span class="el-dropdown-link" style="color:#4D96F4">
-                        {{ user.nickname }}
-                    </span>
-                </el-dropdown>
-
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand" >
+            <div class="flex-header-div">
+                <img  :src="imgCompany" style="width:23%">
+                <el-dropdown  trigger="click" @command="handleCommand" >
                     <span class="el-dropdown-link header_text" style="color:#666666">
                         切换公司
                         <i class="el-icon-caret-bottom"></i>
@@ -54,15 +55,16 @@
                         </el-dropdown-menu>
                     </span>
                 </el-dropdown>
+            </div>
 
-                <div class="btn-message" >
+                <div class="flex-header-div btn-message" >
                     <el-tooltip>
-                        <i class="el-icon-message"></i>
+                        <i class="el-icon-message" style="color:#666666"></i>
                     </el-tooltip>
                     <span class="btn-message-badge" style="color:#666666">消息</span>
                 </div>
 
-                <div class="btn-logout" @click="userLogout">
+                <div class="flex-header-div btn-logout" @click="userLogout">
                     <i class="el-icon-switch-button" style="color:#666666" ></i>
                     <span style="color:#666666">退出</span>
                 </div>
@@ -77,7 +79,7 @@
     import * as api from '../../api/api.js';
     import querystring from "querystring";
     import imgUrl from "../../assets/img/nav_logo.png"
-
+    import imgCompany from '../../assets/img/icon_company.png'
 
     export default {
         data() {
@@ -92,7 +94,8 @@
                 companyName:'',
                 companyNewDetail:[],
                 switchCompany: this.$store.displayName,
-                imgUrl:imgUrl
+                imgUrl:imgUrl,
+                imgCompany:imgCompany
 
             };
         },
@@ -190,7 +193,7 @@
 
         },
         watch: {
-            "$route"(to) {
+            "$route"() {
                 let path = this.$route.path;
                 this.checkRouterLocal(path);
                 // if(to.name === 'sale') {
@@ -244,6 +247,12 @@
         color: #fff;
         box-shadow: 0 0 3px 0 #F2F2F3;
     }
+    .flex-header-div {
+        text-align: center;
+        height: 70px;
+        display: flex;
+        align-items: center;
+    }
     .header-left {
         float: left;
         display: flex;
@@ -281,6 +290,8 @@
         display: flex;
         height: 70px;
         align-items: center;
+        width: 500px;
+        justify-content: space-around;
     }
 
     .expanded{
@@ -305,25 +316,15 @@
 
     .btn-message {
         position: relative;
-        height: 30px;
         text-align: center;
-        border-radius: 15px;
-        margin-left:10px;
         cursor: pointer;
     }
     .btn-message-badge {
         width: 60px;
-        height: 8px;
         border-radius: 4px;
         color: #fff;
     }
 
-    .user-name {
-        margin-left: 10px;
-    }
-    .user-avator {
-        margin-left: 20px;
-    }
     .el-dropdown-link {
         color: #fff;
         cursor: pointer;
@@ -337,9 +338,7 @@
     }
 
     .btn-logout {
-        margin: 0 10px;
         cursor: pointer;
-
     }
 
     .el-icon-s-fold {
