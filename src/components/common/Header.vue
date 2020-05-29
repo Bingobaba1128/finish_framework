@@ -5,16 +5,24 @@
                 <img  :src="imgUrl">
             </div>
             <div class="root header_text" @click="backToConsole">
-                控制台
+                工作台
             </div>
-            <div class="expanded" v-show="true">
+            <!-- <div style="position:relative"> -->
+               <div class="root header_text" @click="toHrSystem">
+                    人事管理
+                </div> 
+            <!-- </div> -->
+            
+            <div class="expanded" v-show="true" style="align-item:center">
                 <div class="system-list header_text" 
                     v-for="(item, index) in nav"
                     :key="index"
                     @click="routerLink(index, item)">
-                    <p :class="navIndex === index ? 'active' : ''">
-                        {{ item.name }}
-                    </p>
+                    <li class="list_style" style="list-style-type:none;">
+                        <p :class="navIndex === index ? 'active list' : ''">
+                            {{ item.name }}
+                        </p>
+                    </li>
                 </div>               
             </div>    
         </div>
@@ -189,6 +197,9 @@
             },
             backToConsole() {
                 this.$router.push('/dashboard') 
+            },
+            toHrSystem() {
+                this.$router.push('/hrSystem') 
             }
 
         },
@@ -297,7 +308,8 @@
     .expanded{
         margin-left: -20px;
         order:3;
-        display: flex
+        display: flex;
+        position: relative;
     }
     .root {
         cursor: pointer;
@@ -307,12 +319,13 @@
     }
 
     .system-list {
-        padding:20px 6px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 0px 20px;
+        position: relative;
     }
-    .system-list :hover {
-        transform: translateY(5px)
-    }
+
 
     .btn-message {
         position: relative;
@@ -346,4 +359,25 @@
     }
 
     .active{color:#409eff;}
+
+    .list_style::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 0;
+        height: 100%;
+        border-bottom: 4px solid #409eff;
+        transition: 0.2s all linear;
+    }
+ 
+    .list_style:hover::before {
+        width: 100%;
+        left: 0;
+    }
+    
+    .list_style:hover ~ .list_style::before {
+        left: 0;
+    }
+
 </style>
