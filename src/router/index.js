@@ -3,10 +3,11 @@ import Router from 'vue-router'
 //import Login from '../components/page/login.vue'
 // const dashboard = resolve => require(['../components/page/dashboard.vue'], resolve);
 import ssoLogin from '../components/page/ssologin.vue'
-import sale from '../components/page/sale.vue'
+import sale from '../components/subSystem/saleSystem.vue'
 import Layout from '../components/page/Layout.vue'
 import dashboard from '../components/page/dashboard.vue'
 import localLogin from '../components/page/localLogin.vue'
+import hrSystem from '../components/subSystem/hrSystem.vue'
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ const router = new Router({
                     path: '/saleSystem',
                     name: 'sale',
                     component: sale 
+                },
+                {
+                    path: '/hrSystem',
+                    name: 'hrSystem',
+                    component: hrSystem 
                 }
             ]
         }
