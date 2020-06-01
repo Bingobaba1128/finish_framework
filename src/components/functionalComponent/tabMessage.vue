@@ -116,11 +116,14 @@
                     type: 'error'
                 });
             },
-            clickConfirm(){
+            clickConfirm(index){
+                const item = this.unread.splice(index,1);
+                this.read = item.concat(this.read)
                 this.$message({
                     message: '审批已通过',
                     type: 'success'
                 });
+                // bus.$emit('msg',this.unread.length);
             }
         }
     }

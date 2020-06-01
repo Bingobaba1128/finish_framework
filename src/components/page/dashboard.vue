@@ -5,17 +5,14 @@
             <v-weather></v-weather>
         </div>
     <div>
-        <el-row :gutter="10" type="flex" justify="center" style="margin:15px auto">
-            <div class="datemanage"></div>
+        <el-row :gutter="10" type="flex" justify="center" style="margin:15px auto; padding:0 5px ">
             <el-col :span="16" class="grid-content" style="height:350px">
                 <el-row style="width:90%">
-
                     <el-col :span="13">
                         <v-calendar></v-calendar>
                     </el-col>
-
                     <el-col :span="11">
-                            <p style="padding-left:20px">在这里放置每日运势</p>
+                        <p style="padding-left:20px">在这里放置每日运势</p>
                     </el-col>
                 </el-row>
             </el-col>
@@ -52,8 +49,11 @@
         <el-row :gutter="10" type="flex" justify="center" style="margin:15px auto">
             <el-col :span="24">
                 <el-row :gutter="10" type="flex" justify="center" >
-                    <el-col :span="24">
-                            <v-message></v-message>           
+                    <el-col :span="12">
+                        <v-message></v-message>           
+                    </el-col>
+                    <el-col :span="12">
+                        <v-message></v-message>           
                     </el-col>
                 </el-row>
             </el-col>
