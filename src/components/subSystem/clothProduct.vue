@@ -1,9 +1,8 @@
 <template>
     <div>
-    <!-- <iframe src="static/hr_sys/index.html"  -->
     <iframe  
-    v-bind:src="reportUrl"
-    class="pc iframe" scrolling="auto" >
+      v-bind:src="reportUrl"
+      class="pc iframe" scrolling="auto" >
     </iframe>
     </div>
 </template>

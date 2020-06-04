@@ -7,7 +7,10 @@ import sale from '../components/subSystem/saleSystem.vue'
 import Layout from '../components/page/Layout.vue'
 import dashboard from '../components/page/dashboard.vue'
 import localLogin from '../components/page/localLogin.vue'
+import localLogout from '../components/page/ssoLogout.vue'
 import hrSystem from '../components/subSystem/hrSystem.vue'
+import clothSystem from '../components/subSystem/clothProduct.vue'
+
 
 Vue.use(Router);
 
@@ -21,6 +24,10 @@ const router = new Router({
             path:'/login',
             component: localLogin,
             meta: { title: 'login' }
+        },
+        {
+            path:'/logout',
+            component: localLogout
         },
         {
             path:'/home',
@@ -46,7 +53,12 @@ const router = new Router({
                     path: '/hrSystem',
                     name: 'hrSystem',
                     component: hrSystem 
-                }
+                },
+                {
+                    path: '/clothSystem',
+                    name: 'clothSystem',
+                    component: clothSystem 
+                }     
             ]
         }
     ],

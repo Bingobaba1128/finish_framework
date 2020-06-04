@@ -121,8 +121,11 @@
                 this.showSublist = !this.showSublist;
             },
             userLogout() {
-                this.$token.deleteToken();
-                this.$router.push('/login') 
+                // this.$token.deleteToken();
+                // this.$router.redirect('http://120.78.186.60:8087/logout') 
+                // this.$token.deleteToken();
+                //     window.location.href = "http://120.78.186.60:8087/logout"; 
+                this.$router.push('/logout') 
             },
             routerLink(index, route) {
                 this.navIndex = index;
@@ -130,9 +133,6 @@
                 if(key[1] == 'path'){
                    this.$router.push(route[key[1]]) 
                 }
-                if (key[1] == 'redirect') {
-                    window.location.href = route[key[1]]
-                } 
             },
             checkRouterLocal(path) {
                 this.navIndex = this.nav.findIndex(item => item.path === path);
@@ -174,9 +174,9 @@
  
                     }
                     else if(item.displayName == '成衣ERP') {
-                        let redirect = 'http://120.78.186.60:8081'
-                        obj['redirect'] = redirect
-                        list.push(obj)  
+                        let path = '/clothSystem'
+                        obj['path'] = path                        
+                        list.push(obj)
                     }
                     else {
                         let redirect = 'www.baidu.com'

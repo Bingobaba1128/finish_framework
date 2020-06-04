@@ -19,5 +19,5 @@ var config={
     grant_type : "authorization_code",
     code:"",
   }
-  
+
 export default config;
