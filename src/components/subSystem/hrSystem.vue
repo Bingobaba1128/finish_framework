@@ -1,6 +1,7 @@
 <template>
     <div>
-    <iframe src="static/hr_sys/index.html" class="pc iframe" scrolling="auto" >
+    <iframe src="static/hr_sys/index.html" 
+    class="pc iframe" scrolling="auto" >
     </iframe>
     </div>
 </template>

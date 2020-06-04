@@ -15,3 +15,9 @@ export const autologin = (data,ajax) => {
         ajax.get("http://192.168.5.103:8080/ERP/login?" + data)
     )
 }
+
+export const getSpInfo = (data,ajax) => {
+    return (
+        ajax.get("192.168.5.103:8080/ERP/selNotice?style=" + data)
+    )
+}

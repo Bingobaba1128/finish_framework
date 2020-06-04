@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      reportUrl: 'http://120.78.186.60:8095/ERP/#/login',
+      reportUrl: 'http://120.78.186.60:8081/',
       searchTableHeight: 0,
       searchTableWidth: 0
     }

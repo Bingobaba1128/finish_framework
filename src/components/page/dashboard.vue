@@ -5,7 +5,7 @@
             <v-weather></v-weather>
         </div>
     <div>
-        <el-row :gutter="10" type="flex" justify="center" style="margin:15px auto; padding:0 5px ">
+        <el-row :gutter="10" type="flex" justify="center" style="margin:1px auto; padding:0 5px ">
             <el-col :span="16" class="grid-content" style="height:350px">
                 <el-row style="width:90%">
                     <el-col :span="13">
