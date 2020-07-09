@@ -1,5 +1,6 @@
 import { getToken } from '../api/api'
 
+
 var token = {
   savetoken: function (token) {
     sessionStorage.setItem("access_token", token.access_token);

@@ -1,12 +1,36 @@
 <template>
     <div>
-    <iframe src="static/hr_sys/index.html" 
-    class="pc iframe" scrolling="auto" >
+    <iframe  
+      v-bind:src="reportUrl"
+      class="pc iframe" scrolling="auto" >
     </iframe>
     </div>
 </template>
 
 <script>
+export default {
+  methods: {
+    widthHeight() {
+      this.searchTableHeight = window.innerHeight -146;
+      this.searchTableWidth = window.innerWidth - 280
+    },
+  },
+  data() {
+    return {
+      reportUrl: 'http://120.78.186.60:8080/test4/',
+      searchTableHeight: 0,
+      searchTableWidth: 0
+    }
+  },
+   mounted() {
+    window.onresize = () => {
+      this.widthHeight(); // 自适应高宽度
+    };
+    this.$nextTick(function () {
+      this.widthHeight();
+    });
+  },
+}
 </script>
 
 <style>

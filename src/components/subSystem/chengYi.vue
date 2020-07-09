@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      reportUrl: 'http://120.78.186.60:8099/',
+      reportUrl: 'http://120.78.186.60:8093/',
       searchTableHeight: 0,
       searchTableWidth: 0
     }

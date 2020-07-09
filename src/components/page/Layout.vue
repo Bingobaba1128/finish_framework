@@ -1,8 +1,7 @@
 <template>
     <div class="wrapper">
         <v-head></v-head>
-              <router-view></router-view>
-
+        <router-view></router-view>
     </div>
 </template>
 

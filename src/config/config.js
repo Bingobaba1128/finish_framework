@@ -10,7 +10,7 @@ var config={
    //回调地址
     redirect_uri : "http://127.0.0.1:8080/home",
     //案例资源服务器地址
-    resUri:"http://localhost:8080",
+    resUri:"http://localhost:8080/",
     //客户端相关标识，请从认证服务器申请
     clientId: "erp_v",
     client_secret:"erpVietnam",
