@@ -10,6 +10,8 @@ import localLogin from '../components/page/localLogin.vue'
 import localLogout from '../components/page/ssoLogout.vue'
 import hrSystem from '../components/subSystem/hrSystem.vue'
 import clothSystem from '../components/subSystem/clothProduct.vue'
+import caiGouSystem from '../components/subSystem/caiGouSystem.vue'
+
 
 Vue.use(Router);
 
@@ -58,11 +60,11 @@ const router = new Router({
                     name: 'clothSystem',
                     component: clothSystem 
                 },
-                // {
-                //     path: '/chengYiSystem',
-                //     name: 'chengYiSystem',
-                //     component: chengYiSystem 
-                // }      
+                {
+                    path: '/采购系统',
+                    name: 'caiGouSystem',
+                    component: caiGouSystem 
+                }      
             ]
         }
     ],
@@ -70,22 +72,22 @@ const router = new Router({
 })
 
 // 导航守卫
-// router.beforeEach((to, from, next) => {
-//     if (to.path === '/login') {
-//         return next();
-//     } else {
-//         const code = window.sessionStorage.getItem('access_token')
-//         if (to.path === '/home') {
-//             next();
-//         } else {
-//             if(!code){
-//               next('/login');  
-//             }
-//             next()
+router.beforeEach((to, from, next) => {
+    if (to.path === '/login') {
+        return next();
+    } else {
+        const code = window.sessionStorage.getItem('access_token')
+        if (to.path === '/home') {
+            next();
+        } else {
+            if(!code){
+              next('/login');  
+            }
+            next()
             
-//         }
-//     }
-//   });
+        }
+    }
+  });
 
 export default router;
 // export default new VueRouter ({

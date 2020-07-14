@@ -4,16 +4,37 @@
             <div class="logo">
                 <img  :src="imgUrl">
             </div>
-            <div class="root header_text" @click="backToConsole">
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+  <el-menu-item index="1" @click="backToConsole">工作台</el-menu-item>
+
+  <el-menu-item index="2" @click="toCaiGouSystem">采购系统</el-menu-item>
+
+
+  <!-- <el-submenu index="2">
+    <template slot="title">我的工作台</template>
+    <el-menu-item index="2-1">选项1</el-menu-item>
+    <el-menu-item index="2-2">选项2</el-menu-item>
+    <el-menu-item index="2-3">选项3</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">选项4</template>
+      <el-menu-item index="2-4-1">选项1</el-menu-item>
+      <el-menu-item index="2-4-2">选项2</el-menu-item>
+      <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </el-submenu>
+  </el-submenu> -->
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+</el-menu>
+            <!-- <div class="root header_text" @click="backToConsole">
                 工作台
-            </div>
+            </div> -->
             <!-- <div style="position:relative"> -->
-               <div class="root header_text" @click="toHrSystem">
+               <!-- <div class="root header_text" @click="toHrSystem">
                     人事管理
-                </div> 
+                </div>  -->
             <!-- </div> -->
             
-            <div class="expanded" v-show="true" style="align-item:center">
+            <!-- <div class="expanded" v-show="true" style="align-item:center">
                 <div class="system-list header_text" 
                     v-for="(item, index) in nav"
                     :key="index"
@@ -24,7 +45,7 @@
                         </p>
                     </li>
                 </div>               
-            </div>    
+            </div>     -->
         </div>
 
         <div class="header-right">
@@ -200,6 +221,10 @@
             },
             toHrSystem() {
                 this.$router.push('/hrSystem') 
+            },
+            toCaiGouSystem(){
+                this.$router.push('/采购系统') 
+
             }
 
         },
@@ -267,7 +292,8 @@
     .header-left {
         float: left;
         display: flex;
-        color:#4D96F4
+        color:#4D96F4;
+        height: 70px;
     }
     .header_text {
         color: #666666;
